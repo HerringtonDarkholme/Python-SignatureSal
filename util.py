@@ -7,6 +7,8 @@ import os
 from skimage.transform import resize
 from scipy.fftpack import dct, idct
 
+_resize = resize
+
 def dct2(arr):
     """
     @todo: 2D-dct, constructed from scipy's dct2
@@ -64,7 +66,7 @@ def loadImg(inp):
     """
     if isinstance(inp, str):
         #@todo : add url support
-        path = os.path.join(os.getcwd(), str)
+        path = os.path.abspath(inp)
         if not os.path.isfile(path):
             raise IOError('no such file')
         return io.imread(inp)
@@ -79,6 +81,7 @@ def loadImg(inp):
 
 def resize(img, width):
     #image.shape : height, width, rgb
-    height = float(img.shape[1]) / width * img.shape[0]
+    height = width / float(img.shape[1]) * img.shape[0]
     height = int(height)
-    return resize(img, (height, width))
+    print _resize(img, (height, width))
+    return _resize(img, (height, width))
