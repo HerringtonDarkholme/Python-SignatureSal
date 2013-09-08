@@ -43,9 +43,9 @@ def gaussian(image, sigma):
 
 def rgb2lab(img, colorType):
     cType = colorType.lower()
-    if cType is 'rgb':
+    if cType == 'rgb':
         return img
-    if cType is 'lab':
+    if cType == 'lab':
         return color.rgb2lab(img)
 
 def getChannel(img, channelNum):
@@ -83,5 +83,4 @@ def resize(img, width):
     #image.shape : height, width, rgb
     height = width / float(img.shape[1]) * img.shape[0]
     height = int(height)
-    print _resize(img, (height, width))
     return _resize(img, (height, width))

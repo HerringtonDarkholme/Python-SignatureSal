@@ -24,8 +24,8 @@ class SignatureSal(object):
     def makeMap(self, src):
         img = loadImg(src)
         orgSize = img.shape[1]
+        img = rgb2lab(img, self._params['colorChannel'])
         img = resize(img, self._params['mapWidth'])
-        #img = rgb2lab(img, self._params['colorChannel'])
 
         outmap = np.zeros((img.shape[0], img.shape[1]))
         for i in range(img.shape[2]): #height, width, color
@@ -49,5 +49,6 @@ class SignatureSal(object):
 
 if __name__ == '__main__':
     import sys
+    #test = SignatureSal(sys.argv[1], {'colorChannel': 'rgb'})
     test = SignatureSal(sys.argv[1])
     test.show()
